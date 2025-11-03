@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include <rhash.h>
 #include "config.h"
 
@@ -12,12 +13,13 @@
 
 // Функция для вывода хеша в нужном формате
 void print_hash(unsigned char *hash, int hash_len, int uppercase) {
+    char output[130];
     if (uppercase) {
-        rhash_print_bytes(stdout, hash, hash_len, RHPR_HEX);
+        rhash_print_bytes(output, hash, hash_len, RHPR_HEX);
     } else {
-        rhash_print_bytes(stdout, hash, hash_len, RHPR_BASE64);
+        rhash_print_bytes(output, hash, hash_len, RHPR_BASE64);
     }
-    printf("\n");
+    printf("%s\n", output);
 }
 
 int main() {

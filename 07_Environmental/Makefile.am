@@ -20,3 +20,4 @@ EXTRA_DIST = tests/test_md5.sh tests/test_sha1.sh tests/test_file.txt
 
 gitclean:
 	git clean -df
+	rm *.o
