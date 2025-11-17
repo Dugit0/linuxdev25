@@ -15,7 +15,7 @@ int main() {
 
     int low = 1;
     int high = 100;
-    char response[4];
+    char response[10] = "";
 
     printf(_("Think of a number between 1 and 100.\n"));
 
@@ -24,7 +24,7 @@ int main() {
         printf(_("Is your number greater than %d? (Yes/No)\n"), guess);
 
         while (1) {
-            if (scanf("%3s", response) != 1) {
+            if (scanf("%s", response) != 1) {
                 printf(_("\nInput closed unexpectedly. Exiting.\n"));
                 return 1;
             }

@@ -17,7 +17,7 @@ if(GETTEXT_FOUND)
 
     add_custom_command(
         OUTPUT ${PO_DIR}/${GETTEXT_DOMAIN}.pot
-        COMMAND xgettext --from-code=UTF-8 -o ${PO_DIR}/${GETTEXT_DOMAIN}.pot ${CMAKE_CURRENT_SOURCE_DIR}/src/main.c
+        COMMAND xgettext --keyword=_ --from-code=UTF-8 -o ${PO_DIR}/${GETTEXT_DOMAIN}.pot src/main.c
         COMMENT "Generating POT file"
     )
 
