@@ -1,0 +1,27 @@
+--- main0.c	2025-11-23 23:01:33.304034083 +0300
++++ main1.c	2025-11-23 23:07:03.780235248 +0300
+@@ -37,11 +37,22 @@
+ }
+ 
+ 
+-int main(void) {
++int main(int argc, char* argv[]) {
++
++    if (argc != 2) {
++        fprintf(stderr, "Error: incorrect argc (argc = %d)\n", argc);
++        return 1;
++    }
++
++    int num_rooms = atoi(argv[1]);
++    if (num_rooms <= 0) {
++        fprintf(stderr, "Error: incorrect number of rooms\n");
++        return 1;
++    }
++
+     int seed = 42;
+     char wall = '#';
+     char space = '.';
+-    int num_rooms = 4;
+ 
+     srand(seed);
+ 

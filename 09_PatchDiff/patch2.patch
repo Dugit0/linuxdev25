@@ -1,0 +1,39 @@
+--- main1.c	2025-11-23 23:07:03.780235248 +0300
++++ main2.c	2025-11-23 23:13:42.750270837 +0300
+@@ -1,5 +1,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
+ 
+ 
+ void print_maze(char** maze, int size) {
+@@ -39,20 +40,25 @@
+ 
+ int main(int argc, char* argv[]) {
+ 
+-    if (argc != 2) {
++    if (argc != 3) {
+         fprintf(stderr, "Error: incorrect argc (argc = %d)\n", argc);
+         return 1;
+     }
+ 
+-    int num_rooms = atoi(argv[1]);
++    if (strlen(argv[1]) != 2) {
++        fprintf(stderr, "Error: incorrect argv[1] length (%lu)\n", strlen(argv[1]));
++        return 1;
++    }
++    char space = argv[1][0];
++    char wall = argv[1][1];
++
++    int num_rooms = atoi(argv[2]);
+     if (num_rooms <= 0) {
+         fprintf(stderr, "Error: incorrect number of rooms\n");
+         return 1;
+     }
+ 
+     int seed = 42;
+-    char wall = '#';
+-    char space = '.';
+ 
+     srand(seed);
+ 
