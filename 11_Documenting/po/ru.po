@@ -1,0 +1,36 @@
+#: src/main.c:20
+#, c-format
+msgid "Think of a number between 1 and 100.\n"
+msgstr "Загадайте число от 1 до 100.\n"
+
+#: src/main.c:24
+#, c-format
+msgid "Is your number greater than %d? (Yes/No)\n"
+msgstr "Ваше число больше, чем %d (Да/Нет)\n"
+
+#: src/main.c:28
+#, c-format
+msgid ""
+"\n"
+"Input closed unexpectedly. Exiting.\n"
+msgstr ""
+"\n"
+"Неожиданное завершение программы!\n"
+
+#: src/main.c:35
+msgid "Yes"
+msgstr "Да"
+
+#: src/main.c:38
+msgid "No"
+msgstr "Нет"
+
+#: src/main.c:42
+#, c-format
+msgid "Invalid input. Please enter 'Yes' or 'No'.\n"
+msgstr "Некорректный ввод. Введите 'Да' или 'Нет'.\n"
+
+#: src/main.c:47
+#, c-format
+msgid "Your number is %d!\n"
+msgstr "Ваше число %d!\n"
