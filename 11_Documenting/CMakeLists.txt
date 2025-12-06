@@ -3,27 +3,39 @@ cmake_minimum_required(VERSION 3.10)
 project(GuessTheNumber C)
 
 add_executable(guess src/main.c)
-
 find_package(Gettext REQUIRED)
-
 find_package(Intl REQUIRED)
+
+
+if(Intl_FOUND)
+    target_include_directories(guess PRIVATE ${Intl_INCLUDE_DIRS})
+    target_link_libraries(guess PRIVATE ${Intl_LIBRARIES})
+else()
+    message(WARNING "Intl not found.")
+endif()
 
 if(GETTEXT_FOUND)
     message(STATUS "Gettext found")
 
     set(GETTEXT_DOMAIN "guess")
-    set(PO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/po")
+    set(POT_FILE "${CMAKE_CURRENT_BINARY_DIR}/${GETTEXT_DOMAIN}.pot")
+    set(PO_DIR "${CMAKE_SOURCE_DIR}/po")
     set(LOCALE_DIR "${CMAKE_CURRENT_BINARY_DIR}/locale")
 
+
     add_custom_command(
-        OUTPUT ${PO_DIR}/${GETTEXT_DOMAIN}.pot
-        COMMAND xgettext --keyword=_ --from-code=UTF-8 -o ${PO_DIR}/${GETTEXT_DOMAIN}.pot src/main.c
+        OUTPUT ${POT_FILE}
+        COMMAND xgettext --keyword=_ --from-code=UTF-8 -o ${POT_FILE} ${CMAKE_SOURCE_DIR}/src/main.c
         COMMENT "Generating POT file"
     )
 
-    add_custom_target(pot ALL DEPENDS ${PO_DIR}/${GETTEXT_DOMAIN}.pot)
+    add_custom_target(
+        pot
+        ALL
+        DEPENDS src/main.c
+    )
 
-    set(LANGUAGES ru)
+    set(LANGUAGES ru_RU.UTF-8)
 
     foreach(LANG ${LANGUAGES})
         set(PO_FILE ${PO_DIR}/${LANG}.po)
@@ -33,31 +45,32 @@ if(GETTEXT_FOUND)
         file(MAKE_DIRECTORY ${MO_DIR})
 
         add_custom_command(
-            OUTPUT ${PO_FILE}.dummy
-            COMMAND msgmerge --update ${PO_FILE} ${PO_DIR}/${GETTEXT_DOMAIN}.pot
-            DEPENDS ${PO_DIR}/${GETTEXT_DOMAIN}.pot
-            COMMENT "Updating ${LANG}.po"
-            VERBATIM
+            OUTPUT ${PO_FILE}
+            COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --update ${PO_FILE} ${POT_FILE}
+            DEPENDS ${POT_FILE}
+            COMMENT "Updating ${POT_FILE}"
         )
 
         add_custom_command(
             OUTPUT ${MO_FILE}
             COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${MO_FILE} ${PO_FILE}
-            DEPENDS ${PO_FILE}
+            DEPENDS src/main.c ${POT_FILE} ${PO_FILE}
             COMMENT "Compiling ${LANG}.po to ${MO_FILE}"
         )
 
-        add_custom_target(mo_${LANG} ALL DEPENDS ${MO_FILE} ${PO_FILE}.dummy)
+        add_custom_target(
+            mo_${LANG}
+            ALL
+            DEPENDS ${MO_FILE} ${PO_FILE}
+        )
         add_dependencies(guess mo_${LANG})
+
     endforeach()
 
     install(
         DIRECTORY ${LOCALE_DIR}/
         DESTINATION share/locale
     )
-
-    target_include_directories(guess PRIVATE ${Intl_INCLUDE_DIRS})
-    target_link_libraries(guess PRIVATE ${Intl_LIBRARIES})
 
     add_custom_target(clean_locale
         COMMAND ${CMAKE_COMMAND} -E remove -f ${PO_DIR}/${GETTEXT_DOMAIN}.pot
