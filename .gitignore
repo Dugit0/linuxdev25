@@ -2,6 +2,11 @@
 01_TerminalProject/Show
 notes.md
 
+# My .gitignore
+build/
+*.pot
+*.mo
+
 # Prerequisites
 *.d
 
