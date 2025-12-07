@@ -5,6 +5,7 @@ project(GuessTheNumber C)
 add_executable(guess src/main.c)
 find_package(Gettext REQUIRED)
 find_package(Intl REQUIRED)
+find_package(Doxygen REQUIRED)
 
 
 if(Intl_FOUND)
@@ -80,4 +81,31 @@ if(GETTEXT_FOUND)
 
 else()
     message(WARNING "Gettext not found. Building without localization support.")
+endif()
+
+if(Doxygen_FOUND)
+    set(DOXYFILE "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile")
+    set(DOXYFILEIN "${CMAKE_SOURCE_DIR}/Doxyfile.in")
+    set(TOP_SRC_DIR ${CMAKE_SOURCE_DIR})
+    set(DOCS "${CMAKE_CURRENT_BINARY_DIR}/docs")
+
+    configure_file(
+        "${DOXYFILEIN}"
+        "${DOXYFILE}"
+    )
+
+    add_custom_command(
+        OUTPUT ${DOCS}
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE}
+        COMMENT "Compile docs"
+    )
+    add_custom_target(
+        docs
+        ALL
+        DEPENDS ${DOCS}
+    )
+    add_dependencies(guess docs)
+
+else()
+    message(WARNING "Doxygen not found. Building without docs.")
 endif()

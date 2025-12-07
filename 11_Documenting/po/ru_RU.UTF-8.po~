@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: linuxdev 25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-07 01:51+0300\n"
+"POT-Creation-Date: 2025-12-05 19:58+0300\n"
 "PO-Revision-Date: 2025-12-05 21:26+0300\n"
 "Last-Translator:  <dmitry@desktop-a337ffd.localdomain>\n"
 "Language-Team: Russian <gnu@d07.ru>\n"
@@ -18,28 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:104
-#, c-format
-msgid ""
-"Guess the number\n"
-"\n"
-"-r - change program to roman mode\n"
-msgstr ""
-"Угадай число\n"
-"\n"
-"-r - переключает программу в режим римских чисел\n"
-
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:115
+#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:23
 #, c-format
 msgid "Think of a number between %s and %s.\n"
 msgstr "Загадайте число от %s до %s.\n"
 
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:125
+#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:31
 #, c-format
 msgid "Is your number greater than %s? (Yes/No)\n"
 msgstr "Ваше число больше, чем %s (Да/Нет)\n"
 
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:130
+#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:36
 #, c-format
 msgid ""
 "\n"
@@ -48,20 +37,20 @@ msgstr ""
 "\n"
 "Неожиданное завершение программы!\n"
 
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:137
+#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:43
 msgid "Yes"
 msgstr "Да"
 
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:140
+#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:46
 msgid "No"
 msgstr "Нет"
 
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:144
+#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:50
 #, c-format
 msgid "Invalid input. Please enter 'Yes' or 'No'.\n"
 msgstr "Некорректный ввод. Введите 'Да' или 'Нет'.\n"
 
-#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:153
+#: /home/dmitry/SemM1/linuxdev25/11_Documenting/src/main.c:57
 #, c-format
 msgid "Your number is %s!\n"
 msgstr "Ваше число %s!\n"
