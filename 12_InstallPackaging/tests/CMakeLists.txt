@@ -1,0 +1,13 @@
+file(GLOB TEST_SOURCES "t_*.c")
+
+foreach(test_src ${TEST_SOURCES})
+    get_filename_component(test_name ${test_src} NAME_WE)
+    add_executable(${test_name} ${test_src})
+    target_link_libraries(${test_name} PRIVATE roman)
+    if((CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "Clang")
+       AND NOT WIN32)
+        target_compile_options(${test_name} PRIVATE -fsanitize=address -g)
+        target_link_options(${test_name} PRIVATE -fsanitize=address)
+    endif()
+    add_test(NAME ${test_name} COMMAND ${test_name})
+endforeach()

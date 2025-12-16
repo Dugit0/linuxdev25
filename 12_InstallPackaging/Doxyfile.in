@@ -1,0 +1,15 @@
+PROJECT_NAME           = "Guess Number Game"
+PROJECT_BRIEF          = "Number guessing game with Roman numerals support"
+OUTPUT_LANGUAGE        = Russian
+OUTPUT_DIRECTORY       = docs
+INPUT                  = @TOP_SRC_DIR@/src
+RECURSIVE              = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+GENERATE_LATEX         = NO
+GENERATE_HTML          = YES
+GENERATE_MAN           = YES
+MAN_EXTENSION          = .1
