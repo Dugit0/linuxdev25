@@ -7,7 +7,10 @@ find_package(Gettext REQUIRED)
 find_package(Intl REQUIRED)
 find_package(Doxygen REQUIRED)
 
-add_library(roman src/roman.c)
+add_library(roman SHARED src/roman.c)
+set_target_properties(roman PROPERTIES
+    PUBLIC_HEADER include/roman.h
+)
 target_include_directories(roman PUBLIC include)
 target_link_libraries(guess roman)
 
@@ -122,4 +125,39 @@ if(Doxygen_FOUND)
 
 else()
     message(WARNING "Doxygen not found. Building without docs.")
+endif()
+
+# -------- Install --------
+install(
+    TARGETS guess
+    RUNTIME
+)
+install(
+    DIRECTORY include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/roman
+)
+install(
+    TARGETS roman
+    LIBRARY
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/roman
+)
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/docs/man/
+        DESTINATION share/man
+        OPTIONAL)
+
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/docs/html/
+        DESTINATION share/doc/${CMAKE_PROJECT_NAME}/html
+        OPTIONAL)
+
+
+# -------- Uninstall --------
+# uninstall target
+if(NOT TARGET uninstall)
+  configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY)
+
+  add_custom_target(uninstall
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif()
